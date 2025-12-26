@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --anime-accent-1: #ec4899; /* 粉 */
+  --anime-accent-2: #f472b6; /* 浅粉 */
+  --bg-pink-1: #fdf2f8; /* 粉色背景 */
+  --bg-pink-2: #fce7f3;
+}
+
+/* 卡片样式 */
+.glass-card {
+  background: #fce7f3; /* 粉色背景 */
+  border: 1px solid #f9a8d4;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 链接卡片 */
+.link-compact { 
+  padding: 8px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px; 
+  align-items: flex-start; 
+}
+
+/* 标签 */
+.pill { 
+  display: inline-block; 
+  padding: 4px 8px; 
+  font-size: 12px; 
+  border-radius: 999px; 
+  background: #f9a8d4; 
+  color: #000; 
+}
+
+.pill-accent { 
+  background: linear-gradient(90deg,var(--anime-accent-2),var(--anime-accent-1)); 
+  color: #000; 
+}
+
+/* 分类卡片 */
+.category-compact { 
+  padding: 10px 12px; 
+  border-radius: 10px; 
+  font-size: 14px; 
+  background: #fbcfe8; 
+}
+
+/* 网格布局 */
+.site-grid-tight { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); 
+  gap: 12px; 
+}
+
+/* 两栏布局 */
+.two-col {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .two-col { 
+    grid-template-columns: 1fr; 
+  }
+}
+
+.left-menu {
+  position: sticky;
+  top: 72px;
+  align-self: start;
+}
+
+.left-menu .categories-list { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+}
+
+.center-main { 
+  width: 100%; 
+}
+
+/* 截断文本 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-pink-1), var(--bg-pink-2));
+  color: #000;
+}
+
+/* 容器宽度参考 hao.uisdc.com 更窄更居中 */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 头部风格：粉色主题 */
+.site-header {
+  background: #fce7f3;
+  border-bottom: 1px solid #f9a8d4;
+  position: relative;
+}
+
+/* 全局链接风格 */
+a { color: var(--anime-accent-2); transition: color .18s ease; }
+a:hover { color: var(--anime-accent-1); }
+
+/* 卡片统一内边距与文字颜色 */
+.glass-card { padding: 12px; color: #000; }
+
+/* 更紧凑的网格 */
+.site-grid-tight { display: grid; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); gap: 12px; }
+
+/* 粉色主题：全宽小字号，左右双栏布局 */
+body {
+  font-size: 14px;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(236,72,153,0.07), transparent),
+    linear-gradient(180deg, var(--bg-dark-1), var(--bg-dark-2));
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 两栏布局 */
+.two-col {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+.left-menu {
+  position: sticky;
+  top: 72px;
+  align-self: start;
+}
+
+/* 手机端侧边栏折叠样式：覆盖为固定抽屉 */
+@media (max-width: 1024px) {
+  .left-menu {
+    position: fixed;
+    left: 0;
+    top: 72px;
+    bottom: 0;
+    width: 84%;
+    max-width: 320px;
+    transform: translateX(-110%);
+    transition: transform .28s ease;
+    z-index: 60;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-right: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .left-menu.open {
+    transform: translateX(0);
+    box-shadow: 0 20px 60px rgba(2,6,23,0.6);
+  }
+
+  /* 点击目标稍大以便触控 */
+  .glass-card, .pill, button, .category-compact {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.02);
+  }
+
+  .site-grid-tight { gap: 10px; }
+}
+
+.left-menu .search {
+  display: flex;
+  gap: 8px;
+}
+
+.left-menu .categories-list { display: flex; flex-direction: column; gap: 8px; }
+
+.center-main { width: 100%; }
+
+/* 更紧凑的卡片基类 */
+.compact-card { padding: 10px; border-radius: 10px; font-size: 14px; }
+
+/* 链接卡更紧凑 */
+.link-compact { padding: 8px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+
+/* 小字号的分类项（用于左侧菜单） */
+.category-compact { padding: 8px 10px; border-radius: 6px; font-size: 13px; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 响应式网格微调 */
+.site-grid-tight { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+
+
+/* 可访问性：焦点可见性（仅在键盘导航时显示） */
+:focus {
+  outline: none;
+}
+
+/* 使用 :focus-visible 支持键盘焦点提示 */
+:focus-visible {
+  outline: 3px solid rgba(139,92,246,0.18);
+  outline-offset: 2px;
+}
+
+/* 平滑滚动体验 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 卡片交互细化：更柔和的悬停与聚焦动画 */
+.glass-card {
+  transition: transform 0.22s cubic-bezier(.2,.9,.2,1), box-shadow 0.22s, opacity 0.18s;
+}
+.glass-card:focus-within, .glass-card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(2,6,23,0.44);
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg,var(--anime-accent-2),var(--anime-accent-1));
+  color: white;
+  box-shadow: 0 8px 28px rgba(6,20,40,0.5);
+  z-index: 80;
+  cursor: pointer;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.back-to-top:hover { transform: translateY(-4px); }
+.back-to-top.hidden { opacity: 0; pointer-events: none; }
